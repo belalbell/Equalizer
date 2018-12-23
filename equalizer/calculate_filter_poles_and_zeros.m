@@ -1,0 +1,2 @@
+function calculate_filter_poles_and_zeros(filtered_signal)
+fvtool(filtered_signal);
