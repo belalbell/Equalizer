@@ -22,7 +22,7 @@ function varargout = equalizer(varargin)
 
 % Edit the above text to modify the response to help equalizer
 
-% Last Modified by GUIDE v2.5 22-Dec-2018 15:35:45
+% Last Modified by GUIDE v2.5 24-Dec-2018 17:26:16
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -75,9 +75,7 @@ varargout{1} = handles.output;
 
 % --- Executes on button press in browse.
 function browse_Callback(hObject, eventdata, handles)
-% hObject    handle to browse (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% --- browse to get the *.wav file
 [filename pathname]=uigetfile({'*.wav'},'File Selector');
 handles.fullpathname = strcat(pathname,filename);
 set(handles.address ,'string' ,handles.fullpathname)
@@ -86,21 +84,11 @@ guidata(hObject ,handles);
 
 % --- Executes on slider movement.
 function slider1_Callback(hObject, eventdata, handles)
-% hObject    handle to slider1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+% --- slider for the gain of 1 band
 
 
 % --- Executes during object creation, after setting all properties.
 function slider1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
@@ -108,21 +96,11 @@ end
 
 % --- Executes on slider movement.
 function slider2_Callback(hObject, eventdata, handles)
-% hObject    handle to slider2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+% --- slider for the gain of 2 band
 
 
 % --- Executes during object creation, after setting all properties.
 function slider2_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
@@ -130,21 +108,11 @@ end
 
 % --- Executes on slider movement.
 function slider3_Callback(hObject, eventdata, handles)
-% hObject    handle to slider3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+% --- slider for the gain of 3 band
 
 
 % --- Executes during object creation, after setting all properties.
 function slider3_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
@@ -152,21 +120,11 @@ end
 
 % --- Executes on slider movement.
 function slider4_Callback(hObject, eventdata, handles)
-% hObject    handle to slider4 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+% --- slider for the gain of 4 band
 
 
 % --- Executes during object creation, after setting all properties.
 function slider4_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider4 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
@@ -174,21 +132,11 @@ end
 
 % --- Executes on slider movement.
 function slider5_Callback(hObject, eventdata, handles)
-% hObject    handle to slider5 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+% --- slider for the gain of 5 band
 
 
 % --- Executes during object creation, after setting all properties.
 function slider5_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider5 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
@@ -196,21 +144,11 @@ end
 
 % --- Executes on slider movement.
 function slider6_Callback(hObject, eventdata, handles)
-% hObject    handle to slider6 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+% --- slider for the gain of 6 band
 
 
 % --- Executes during object creation, after setting all properties.
 function slider6_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider6 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
@@ -218,21 +156,11 @@ end
 
 % --- Executes on slider movement.
 function slider7_Callback(hObject, eventdata, handles)
-% hObject    handle to slider7 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+% --- slider for the gain of 7 band
 
 
 % --- Executes during object creation, after setting all properties.
 function slider7_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider7 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
@@ -240,21 +168,11 @@ end
 
 % --- Executes on slider movement.
 function slider8_Callback(hObject, eventdata, handles)
-% hObject    handle to slider8 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+% --- slider for the gain of 8 band
 
 
 % --- Executes during object creation, after setting all properties.
 function slider8_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider8 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
@@ -262,29 +180,24 @@ end
 
 % --- Executes on slider movement.
 function slider9_Callback(hObject, eventdata, handles)
-% hObject    handle to slider9 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+% --- slider for the gain of 9 band
 
 
 % --- Executes during object creation, after setting all properties.
 function slider9_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider9 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
+
+% --- get all user input and filter the wav
 function [y,Fs]=play_equalizer(hObject, handles)
 global player;
+% --- getting the sample data and the sample freq from the *.wav file
 [handles.y,handles.Fs] = audioread(handles.fullpathname);
+% --- setting the volume
 handles.Volume=get(handles.volume,'value');
 player = audioplayer(handles.Volume*handles.y, handles.Fs);
+% --- setting the Fs on the user input
 if handles.input.Value == 1
      handles.Fs = handles.rate.Value;
 elseif handles.half.Value == 1
@@ -293,23 +206,24 @@ elseif handles.default.Value == 1
     handles.Fs = handles.Fs;
 elseif handles.double.Value == 1
     handles.Fs = handles.Fs * 2;
-end   
+end
+
 if handles.fir.Value == 1
-     %--- FIR FILTER
+     %--- FIR FILTERS
      
 elseif handles.iir.Value == 1
-         %--- IIR FILTER
+         %--- IIR FILTERS
 end
-%handles.y=handles.y(NewStart:end,:); 
-handles.g1=get(handles.slider1,'value');
-handles.g2=get(handles.slider2,'value');
-handles.g3=get(handles.slider3,'value');
-handles.g4=get(handles.slider4,'value');
-handles.g5=get(handles.slider5,'value');
- handles.g6=get(handles.slider6,'value');
- handles.g7=get(handles.slider7,'value');
- handles.g8=get(handles.slider8,'value');
- handles.g9=get(handles.slider9,'value');
+ 
+handles.g1=get(handles.slider1,'value'); % --- 1 band gain
+handles.g2=get(handles.slider2,'value'); % --- 2 band gain
+handles.g3=get(handles.slider3,'value'); % --- 3 band gain
+handles.g4=get(handles.slider4,'value'); % --- 4 band gain
+handles.g5=get(handles.slider5,'value'); % --- 5 band gain
+handles.g6=get(handles.slider6,'value'); % --- 6 band gain
+handles.g7=get(handles.slider7,'value'); % --- 7 band gain
+handles.g8=get(handles.slider8,'value'); % --- 8 band gain
+handles.g9=get(handles.slider9,'value'); % --- 9 band gain
 set(handles.text17, 'String',handles.g1);
 set(handles.text18, 'String',handles.g2);
 set(handles.text19, 'String',handles.g3);
@@ -319,17 +233,15 @@ set(handles.text22, 'String',handles.g6);
 set(handles.text23, 'String',handles.g7);
 set(handles.text24, 'String',handles.g8);
 set(handles.text25, 'String',handles.g9);
-y = handles.y;
-Fs = handles.Fs;
+y = handles.y; % --- y is the samople data
+Fs = handles.Fs; % --- Fs is the sample freq
 
 
      
 
 % --- Executes on button press in play.
 function play_Callback(hObject, eventdata, handles)
-% hObject    handle to play (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% --- play button to play the wav
 global player
 [y,Fs]=play_equalizer(hObject , handles);
 play(player);
@@ -337,9 +249,7 @@ guidata(hObject);
 
 % --- Executes on button press in pause.
 function pause_Callback(hObject, eventdata, handles)
-% hObject    handle to pause (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% --- pause button to pause the wav
 global player
 [y,Fs]=play_equalizer(hObject , handles);
 pause(player);
@@ -347,9 +257,7 @@ guidata(hObject);
 
 % --- Executes on button press in resume.
 function resume_Callback(hObject, eventdata, handles)
-% hObject    handle to resume (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% --- resume button to resume the wav
 global player
 [y,Fs]=play_equalizer(hObject , handles);
 resume(player);
@@ -357,9 +265,7 @@ guidata(hObject);
 
 % --- Executes on button press in stop.
 function stop_Callback(hObject, eventdata, handles)
-% hObject    handle to stop (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% --- stop button to freeze the wav
 global player
 [y,Fs]=play_equalizer(hObject , handles);
 stop(player);
@@ -367,21 +273,11 @@ guidata(hObject);
 
 % --- Executes on slider movement.
 function volume_Callback(hObject, eventdata, handles)
-% hObject    handle to volume (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'Value') returns position of slider
-%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+% --- volume slider 
 
 
 % --- Executes during object creation, after setting all properties.
 function volume_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to volume (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: slider controls usually have a light gray background.
 if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
@@ -389,22 +285,11 @@ end
 
 
 function rate_Callback(hObject, eventdata, handles)
-% hObject    handle to rate (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of rate as text
-%        str2double(get(hObject,'String')) returns contents of rate as a double
+% --- get the output sample rate
 
 
 % --- Executes during object creation, after setting all properties.
 function rate_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to rate (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
@@ -412,9 +297,7 @@ end
 
 % --- Executes on button press in input_time.
 function input_time_Callback(hObject, eventdata, handles)
-% hObject    handle to input_time (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% --- plot the input in time domain
 global player
 [y,Fs]=play_equalizer(hObject , handles);
 plot_original_signal_in_time_domain(y,Fs);
@@ -422,39 +305,74 @@ plot_original_signal_in_time_domain(y,Fs);
 
 % --- Executes on button press in amp_time.
 function amp_time_Callback(hObject, eventdata, handles)
-% hObject    handle to amp_time (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% --- plot the amplified output on time domain
 
 
 % --- Executes on button press in amp_freq.
 function amp_freq_Callback(hObject, eventdata, handles)
-% hObject    handle to amp_freq (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% --- plot the amplified output on freq domain
 
 
 % --- Executes on button press in otuput_time.
 function otuput_time_Callback(hObject, eventdata, handles)
-% hObject    handle to otuput_time (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% --- plot the output without amplification on time domain
+
 %global player
 %[y,Fs,final_filteredSignal]=play_equalizer(hObject , handles);
 %draw_compare_composite_signal_with_original_signal(final_filteredSignal,y,Fs);
 
 % --- Executes on button press in output_freq.
 function output_freq_Callback(hObject, eventdata, handles)
-% hObject    handle to output_freq (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% --- plot the output without amplification on the freq domain
 
 
 % --- Executes on button press in input_freq.
 function input_freq_Callback(hObject, eventdata, handles)
-% hObject    handle to input_freq (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% --- plot the input on the freq domain
 global player
 [y,Fs]=play_equalizer(hObject , handles);
 plot_original_signal_in_freq_domain(y,Fs);
+
+
+% --- Executes on button press in plot_1_band.
+function plot_1_band_Callback(hObject, eventdata, handles)
+% ----- plot filter 0-170 hz
+
+
+% --- Executes on button press in plot_2_band.
+function plot_2_band_Callback(hObject, eventdata, handles)
+% ----- plot filter 170-310 hz
+
+
+% --- Executes on button press in plot_3_band.
+function plot_3_band_Callback(hObject, eventdata, handles)
+% ----- plot filter 310-600 hz
+
+
+% --- Executes on button press in plot_4_band.
+function plot_4_band_Callback(hObject, eventdata, handles)
+% ----- plot filter 600-1000 hz
+
+
+% --- Executes on button press in plot_5_band.
+function plot_5_band_Callback(hObject, eventdata, handles)
+% ----- plot filter 1-3 khz
+
+
+% --- Executes on button press in plot_6_band.
+function plot_6_band_Callback(hObject, eventdata, handles)
+% ----- plot filter 3-6 khz
+
+
+% --- Executes on button press in plot_7_band.
+function plot_7_band_Callback(hObject, eventdata, handles)
+% ----- plot filter 6-12 khz
+
+% --- Executes on button press in plot_8_band.
+function plot_8_band_Callback(hObject, eventdata, handles)
+% ----- plot filter 12-14 khz
+
+
+% --- Executes on button press in plot_9_band.
+function plot_9_band_Callback(hObject, eventdata, handles)
+% ----- plot filter 14-16 khz
