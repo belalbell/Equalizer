@@ -22,7 +22,7 @@ function varargout = equalizer(varargin)
 
 % Edit the above text to modify the response to help equalizer
 
-% Last Modified by GUIDE v2.5 24-Dec-2018 17:26:16
+% Last Modified by GUIDE v2.5 26-Dec-2018 01:50:05
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -98,6 +98,7 @@ guidata(hObject ,handles);
 % --- Executes on slider movement.
 function slider1_Callback(hObject, eventdata, handles)
 % --- slider for the gain of 1 band
+
 
 
 % --- Executes during object creation, after setting all properties.
@@ -222,13 +223,6 @@ elseif handles.default.Value == 1
 elseif handles.double.Value == 1
     handles.Fs = handles.Fs * 2;
 end
-
-if handles.fir.Value == 1
-     %--- FIR FILTERS
-     
-elseif handles.iir.Value == 1
-         %--- IIR FILTERS
-end
  
 handles.g1=get(handles.slider1,'value'); % --- 1 band gain
 handles.g2=get(handles.slider2,'value'); % --- 2 band gain
@@ -259,6 +253,13 @@ gains(8)=handles.g8;
 gains(9)=handles.g9;
 y = handles.y; % --- y is the samople data
 Fs = handles.Fs; % --- Fs is the sample freq
+if handles.fir.Value == 1
+     %--- FIR FILTERS
+     
+elseif handles.iir.Value == 1
+         %--- IIR FILTERS
+    band1=filter(BIIR170(Fs),y);
+end
 
 
      
@@ -330,17 +331,34 @@ plot_original_signal_in_time_domain(y,Fs);
 % --- Executes on button press in amp_time.
 function amp_time_Callback(hObject, eventdata, handles)
 % --- plot the amplified output on time domain
+%Here plot time output amplified nasser
+global gains;
+global Fs;
+global y;
+[y,Fs,gains]=play_equalizer(hObject , handles);
+Y = y(:,1);
+t = linspace(0, length(Y)./Fs, length(Y));
+figure;
+plot(t,Y);
 
 
 % --- Executes on button press in amp_freq.
 function amp_freq_Callback(hObject, eventdata, handles)
 % --- plot the amplified output on freq domain
-
+%Here plot freq output amplifed nasser
 
 % --- Executes on button press in otuput_time.
 function otuput_time_Callback(hObject, eventdata, handles)
 % --- plot the output without amplification on time domain
-
+%Here plot time output nasser
+global gains;
+global Fs;
+global y;
+    [y,Fs,gains]=play_equalizer(hObject , handles);
+        Y = y(:,1);
+        t = linspace(0, length(Y)./Fs, length(Y));
+        figure;
+        plot(t,Y);
 %global player
 %[y,Fs,final_filteredSignal]=play_equalizer(hObject , handles);
 %draw_compare_composite_signal_with_original_signal(final_filteredSignal,y,Fs);
@@ -348,6 +366,7 @@ function otuput_time_Callback(hObject, eventdata, handles)
 % --- Executes on button press in output_freq.
 function output_freq_Callback(hObject, eventdata, handles)
 % --- plot the output without amplification on the freq domain
+%Here plot freq output nasser
 
 
 % --- Executes on button press in input_freq.
@@ -366,20 +385,9 @@ function plot_1_band_Callback(hObject, eventdata, handles)
  %       figure;
   %      plot(f,abs(FFT_audio_in));
 global band1;
-global band2;
-global band3;
-global band4;
-global band5;
-global band6;
-global band7;
-global band8;
-global band9;
-global data;
 global gains;
 global Fs;
 global y;
-global compositeY;
-
 if handles.iir.Value == 1
     [y,Fs,gains]=play_equalizer(hObject , handles);
     er=BIIR170(Fs);
@@ -387,33 +395,22 @@ if handles.iir.Value == 1
         Y = band1(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
-        plot(t,Y);
+        plot(t,y);
 
 end
 
 % --- Executes on button press in plot_2_band.
 function plot_2_band_Callback(hObject, eventdata, handles)
 % ----- plot filter 170-310 hz
-global band1;
-global band2;
 global band3;
-global band4;
-global band5;
-global band6;
-global band7;
-global band8;
-global band9;
-global data;
 global gains;
 global Fs;
 global y;
-global compositeY;
-
 if handles.iir.Value == 1
     [y,Fs,gains]=play_equalizer(hObject , handles);
-    er=BIIR170(Fs);
-    band1=filter(er,y);
-        Y = band1(:,1);
+    er=BIIR310(Fs);
+    band3=filter(er,y);
+        Y = band3(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
@@ -423,26 +420,15 @@ end
 % --- Executes on button press in plot_3_band.
 function plot_3_band_Callback(hObject, eventdata, handles)
 % ----- plot filter 310-600 hz
-global band1;
-global band2;
-global band3;
 global band4;
-global band5;
-global band6;
-global band7;
-global band8;
-global band9;
-global data;
 global gains;
 global Fs;
 global y;
-global compositeY;
-
 if handles.iir.Value == 1
     [y,Fs,gains]=play_equalizer(hObject , handles);
-    er=BIIR170(Fs);
-    band1=filter(er,y);
-        Y = band1(:,1);
+    er=BIIR600(Fs);
+    band4=filter(er,y);
+        Y = band4(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
@@ -452,26 +438,15 @@ end
 % --- Executes on button press in plot_4_band.
 function plot_4_band_Callback(hObject, eventdata, handles)
 % ----- plot filter 600-1000 hz
-global band1;
-global band2;
-global band3;
-global band4;
 global band5;
-global band6;
-global band7;
-global band8;
-global band9;
-global data;
 global gains;
 global Fs;
 global y;
-global compositeY;
-
 if handles.iir.Value == 1
     [y,Fs,gains]=play_equalizer(hObject , handles);
-    er=BIIR170(Fs);
-    band1=filter(er,y);
-        Y = band1(:,1);
+    er=BIIR1000(Fs);
+    band5=filter(er,y);
+        Y = band5(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
@@ -481,26 +456,16 @@ end
 % --- Executes on button press in plot_5_band.
 function plot_5_band_Callback(hObject, eventdata, handles)
 % ----- plot filter 1-3 khz
-global band1;
-global band2;
-global band3;
-global band4;
-global band5;
 global band6;
-global band7;
-global band8;
-global band9;
-global data;
 global gains;
 global Fs;
 global y;
-global compositeY;
 
 if handles.iir.Value == 1
     [y,Fs,gains]=play_equalizer(hObject , handles);
-    er=BIIR170(Fs);
-    band1=filter(er,y);
-        Y = band1(:,1);
+    er=BIIR3K(Fs);
+    band6=filter(er,y);
+        Y = band6(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
@@ -510,20 +475,10 @@ end
 % --- Executes on button press in plot_6_band.
 function plot_6_band_Callback(hObject, eventdata, handles)
 % ----- plot filter 3-6 khz
-global band1;
-global band2;
-global band3;
-global band4;
-global band5;
-global band6;
 global band7;
-global band8;
-global band9;
-global data;
 global gains;
 global Fs;
-global y
-
+global y;
 if handles.iir.Value == 1
     [y,Fs,gains]=play_equalizer(hObject , handles);
     er=BIIR6K(Fs);

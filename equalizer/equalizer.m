@@ -22,7 +22,7 @@ function varargout = equalizer(varargin)
 
 % Edit the above text to modify the response to help equalizer
 
-% Last Modified by GUIDE v2.5 24-Dec-2018 17:26:16
+% Last Modified by GUIDE v2.5 26-Dec-2018 01:50:05
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -98,6 +98,7 @@ guidata(hObject ,handles);
 % --- Executes on slider movement.
 function slider1_Callback(hObject, eventdata, handles)
 % --- slider for the gain of 1 band
+
 
 
 % --- Executes during object creation, after setting all properties.
@@ -330,17 +331,53 @@ plot_original_signal_in_time_domain(y,Fs);
 % --- Executes on button press in amp_time.
 function amp_time_Callback(hObject, eventdata, handles)
 % --- plot the amplified output on time domain
+%Here plot time output amplified nasser
+global y;
+global Fs;
+global band1;
+global band2;
+global band3;
+global band4;
+global band5;
+global band6;
+global band7;
+global band8;
+global band9;
+global amplifiedwave;
+[y,Fs,gains]=play_equalizer(hObject , handles);
+band1=filter(BIIR170(Fs),y);
+band2=filter(BIIR310(Fs),y);
+band3=filter(BIIR600(Fs),y);
+band4=filter(BIIR1000(Fs),y);
+band5=filter(BIIR3k(Fs),y);
+band6=filter(BIIR6k(Fs),y);
+band7=filter(BIIR12k(Fs),y);
+band8=filter(BIIR14k(Fs),y);
+band9=filter(BIIR16k(Fs),y);
+amplifiedwave = band1*gains(1)+band2*gains(2)+band3*gains(3)+band4*gains(4)+band5*gains(5)+band6*gains(6)+band7*gains(7)+band8*gains(8)+band9*gains(9);data1+data2+data3+data4+data5+data6+data7+data8+data9;
+Y = amplifiedwave(:,1);
+t = linspace(0, length(Y)./Fs, length(Y));
+figure;
+plot(t,Y);
 
 
 % --- Executes on button press in amp_freq.
 function amp_freq_Callback(hObject, eventdata, handles)
 % --- plot the amplified output on freq domain
-
+%Here plot freq output amplifed nasser
 
 % --- Executes on button press in otuput_time.
 function otuput_time_Callback(hObject, eventdata, handles)
 % --- plot the output without amplification on time domain
-
+%Here plot time output nasser
+global gains;
+global Fs;
+global y;
+    [y,Fs,gains]=play_equalizer(hObject , handles);
+        Y = y(:,1);
+        t = linspace(0, length(Y)./Fs, length(Y));
+        figure;
+        plot(t,Y);
 %global player
 %[y,Fs,final_filteredSignal]=play_equalizer(hObject , handles);
 %draw_compare_composite_signal_with_original_signal(final_filteredSignal,y,Fs);
@@ -348,6 +385,7 @@ function otuput_time_Callback(hObject, eventdata, handles)
 % --- Executes on button press in output_freq.
 function output_freq_Callback(hObject, eventdata, handles)
 % --- plot the output without amplification on the freq domain
+%Here plot freq output nasser
 
 
 % --- Executes on button press in input_freq.
