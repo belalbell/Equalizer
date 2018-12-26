@@ -331,7 +331,6 @@ plot_original_signal_in_time_domain(y,Fs);
 % --- Executes on button press in amp_time.
 function amp_time_Callback(hObject, eventdata, handles)
 % --- plot the amplified output on time domain
-%Here plot time output amplified nasser
 global y;
 global Fs;
 global band1;
@@ -344,6 +343,7 @@ global band7;
 global band8;
 global band9;
 global amplifiedwave;
+if handles.iir.Value == 1
 [y,Fs,gains]=play_equalizer(hObject , handles);
 band1=filter(BIIR170(Fs),y);
 band2=filter(BIIR310(Fs),y);
@@ -359,6 +359,7 @@ Y = amplifiedwave(:,1);
 t = linspace(0, length(Y)./Fs, length(Y));
 figure;
 plot(t,Y);
+end
 
 
 % --- Executes on button press in amp_freq.
@@ -378,6 +379,7 @@ global band7;
 global band8;
 global band9;
 global amplifiedwave;
+if handles.iir.Value == 1
 [y,Fs,gains]=play_equalizer(hObject , handles);
 band1=filter(BIIR170(Fs),y);
 band2=filter(BIIR310(Fs),y);
@@ -389,27 +391,27 @@ band7=filter(BIIR12K(Fs),y);
 band8=filter(BIIR14K(Fs),y);
 band9=filter(BIIR16K(Fs),y);
 amplifiedwave = band1*gains(1)+band2*gains(2)+band3*gains(3)+band4*gains(4)+band5*gains(5)+band6*gains(6)+band7*gains(7)+band8*gains(8)+band9*gains(9);
-Y = amplifiedwave(:,1);
-t = linspace(0, Fs, length(Y));
-NFFT = length(Y);
-Y = fft(Y,NFFT);
-%F = ((0:1/NFFT:1-1/NFFT)*Fs).';
-figure;
-plot(t,abs(Y));
+Nfft = length(amplifiedwave);
+f=linspace(0, Fs, Nfft);
+G=abs(fft(amplifiedwave, Nfft));
+        figure;
+plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
+end
 
 
 % --- Executes on button press in otuput_time.
 function otuput_time_Callback(hObject, eventdata, handles)
 % --- plot the output without amplification on time domain
-%Here plot time output nasser
 global gains;
 global Fs;
 global y;
+if handles.iir.Value == 1
 [y,Fs,gains]=play_equalizer(hObject , handles);
 Y = y(:,1);
 t = linspace(0, length(Y)./Fs, length(Y));
 figure;
 plot(t,Y);
+end
 %global player
 %[y,Fs,final_filteredSignal]=play_equalizer(hObject , handles);
 %draw_compare_composite_signal_with_original_signal(final_filteredSignal,y,Fs);
@@ -417,19 +419,18 @@ plot(t,Y);
 % --- Executes on button press in output_freq.
 function output_freq_Callback(hObject, eventdata, handles)
 % --- plot the output without amplification on the freq domain
-%Here plot freq output nasser
 global gains;
 global Fs;
 global y;
+if handles.iir.Value == 1
 [y,Fs,gains]=play_equalizer(hObject , handles);
-Y = y(:,1);
-t = linspace(0, Fs, length(Y));
-NFFT = length(y);
-Y = fft(y,NFFT);
-%F = ((0:1/NFFT:1-1/NFFT)*Fs).';
-figure;
-plot(t,abs(Y));
-
+Nfft = length(y);
+f=linspace(0, Fs, Nfft);
+G=abs(fft(y, Nfft));
+        figure;
+plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
+end
+        
 
 % --- Executes on button press in input_freq.
 function input_freq_Callback(hObject, eventdata, handles)
@@ -441,11 +442,6 @@ plot_original_signal_in_freq_domain(y,Fs);
 
 % --- Executes on button press in plot_1_band.
 function plot_1_band_Callback(hObject, eventdata, handles)
-% ----- plot filter 0-170 hz
-%        f = -Fs/2:Fs/(length(Y)-1):Fs/2;
-%        FFT_audio_in=fftshift(fft(Y))/length(fft(Y));
- %       figure;
-  %      plot(f,abs(FFT_audio_in));
 global band1;
 global gains;
 global Fs;
@@ -457,68 +453,84 @@ if handles.iir.Value == 1
         Y = band1(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
-        plot(t,y);
-
+        plot(t,Y);
+    Nfft = length(band1);
+        f=linspace(0, Fs, Nfft);
+        G=abs(fft(band1, Nfft));
+        figure;
+        plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
 end
 
 % --- Executes on button press in plot_2_band.
 function plot_2_band_Callback(hObject, eventdata, handles)
 % ----- plot filter 170-310 hz
-global band3;
+global band2;
 global gains;
 global Fs;
 global y;
 if handles.iir.Value == 1
     [y,Fs,gains]=play_equalizer(hObject , handles);
     er=BIIR310(Fs);
-    band3=filter(er,y);
-        Y = band3(:,1);
+    band2=filter(er,y);
+        Y = band2(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
-
+    Nfft = length(band2);
+        f=linspace(0, Fs, Nfft);
+        G=abs(fft(band2, Nfft));
+                figure;
+        plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
 end
 
 % --- Executes on button press in plot_3_band.
 function plot_3_band_Callback(hObject, eventdata, handles)
 % ----- plot filter 310-600 hz
-global band4;
+global band3;
 global gains;
 global Fs;
 global y;
 if handles.iir.Value == 1
     [y,Fs,gains]=play_equalizer(hObject , handles);
     er=BIIR600(Fs);
-    band4=filter(er,y);
-        Y = band4(:,1);
+    band3=filter(er,y);
+        Y = band3(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
-
+    Nfft = length(band3);
+        f=linspace(0, Fs, Nfft);
+        G=abs(fft(band3, Nfft));
+                figure;
+        plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
 end
 
 % --- Executes on button press in plot_4_band.
 function plot_4_band_Callback(hObject, eventdata, handles)
 % ----- plot filter 600-1000 hz
-global band5;
+global band4;
 global gains;
 global Fs;
 global y;
 if handles.iir.Value == 1
     [y,Fs,gains]=play_equalizer(hObject , handles);
     er=BIIR1000(Fs);
-    band5=filter(er,y);
-        Y = band5(:,1);
+    band4=filter(er,y);
+        Y = band4(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
-
+    Nfft = length(band4);
+        f=linspace(0, Fs, Nfft);
+        G=abs(fft(band4, Nfft));
+                figure;
+        plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
 end
 
 % --- Executes on button press in plot_5_band.
 function plot_5_band_Callback(hObject, eventdata, handles)
 % ----- plot filter 1-3 khz
-global band6;
+global band5;
 global gains;
 global Fs;
 global y;
@@ -526,30 +538,38 @@ global y;
 if handles.iir.Value == 1
     [y,Fs,gains]=play_equalizer(hObject , handles);
     er=BIIR3K(Fs);
-    band6=filter(er,y);
-        Y = band6(:,1);
+    band5=filter(er,y);
+        Y = band5(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
-
+    Nfft = length(band5);
+        f=linspace(0, Fs, Nfft);
+        G=abs(fft(band5, Nfft));
+                figure;
+        plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
 end
 
 % --- Executes on button press in plot_6_band.
 function plot_6_band_Callback(hObject, eventdata, handles)
 % ----- plot filter 3-6 khz
-global band7;
+global band6;
 global gains;
 global Fs;
 global y;
 if handles.iir.Value == 1
     [y,Fs,gains]=play_equalizer(hObject , handles);
     er=BIIR6K(Fs);
-    band7=filter(er,y);
-        Y = band7(:,1);
+    band6=filter(er,y);
+        Y = band6(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
-
+    Nfft = length(band6);
+        f=linspace(0, Fs, Nfft);
+        G=abs(fft(band6, Nfft));
+        figure;        
+        plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
 end
 
 % --- Executes on button press in plot_7_band.
@@ -568,7 +588,11 @@ if handles.iir.Value == 1
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
-
+    Nfft = length(band7);
+        f=linspace(0, Fs, Nfft);
+        G=abs(fft(band7, Nfft));
+                figure;
+        plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
 end
 % --- Executes on button press in plot_8_band.
 function plot_8_band_Callback(hObject, eventdata, handles)
@@ -579,13 +603,17 @@ global Fs;
 global y;
 if handles.iir.Value == 1
     [y,Fs,gains]=play_equalizer(hObject , handles);
-    er=BIIR14k(Fs);
+    er=BIIR14K(Fs);
     band8=filter(er,y);
         Y = band8(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
-
+    Nfft = length(band8);
+        f=linspace(0, Fs, Nfft);
+        G=abs(fft(band8, Nfft));
+                figure;
+        plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
 end
 
 % --- Executes on button press in plot_9_band.
@@ -603,5 +631,10 @@ if handles.iir.Value == 1
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
+    Nfft = length(band9);
+        f=linspace(0, Fs, Nfft);
+        G=abs(fft(band9, Nfft));
+                figure;
+        plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
 
 end
