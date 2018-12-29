@@ -1,2 +1,0 @@
-function calculate_filter_gain_freq(filtered_signal)
-fvtool(filtered_signal);
