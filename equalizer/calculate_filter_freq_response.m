@@ -1,2 +1,0 @@
-function calculate_filter_freq_response(filtered_signal)
-fvtool(filtered_signal);
