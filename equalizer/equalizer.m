@@ -63,6 +63,7 @@ global band7;
 global band8;
 global band9;
 global gains;
+%Initialize Gains vector with zeros as default
 gains=zeros(1,9);
 
 % Choose default command line output for equalizer
@@ -249,6 +250,7 @@ set(handles.text22, 'String',handles.g6);
 set(handles.text23, 'String',handles.g7);
 set(handles.text24, 'String',handles.g8);
 set(handles.text25, 'String',handles.g9);
+%Save the user input gains in gains vector
 gains(1)=handles.g1;
 gains(2)=handles.g2;
 gains(3)=handles.g3;
@@ -343,7 +345,10 @@ global band7;
 global band8;
 global band9;
 global amplifiedwave;
+%Get Fs and y and user gains
+%Get the output of each band Filter
 [y,Fs,gains]=play_equalizer(hObject , handles);
+%Check if user choose IIR Filter
 if handles.iir.Value == 1
 band1=filter(BIIR170(Fs),y);
 band2=filter(BIIR310(Fs),y);
@@ -354,8 +359,11 @@ band6=filter(BIIR6K(Fs),y);
 band7=filter(BIIR12K(Fs),y);
 band8=filter(BIIR14K(Fs),y);
 band9=filter(BIIR16K(Fs),y);
+% Get the amplified output
 amplifiedwave = band1*gains(1)+band2*gains(2)+band3*gains(3)+band4*gains(4)+band5*gains(5)+band6*gains(6)+band7*gains(7)+band8*gains(8)+band9*gains(9);
 output = amplifiedwave ;
+%Plotting the amplified output in frequency domain
+
 Y = amplifiedwave(:,1);
 t = linspace(0, length(Y)./Fs, length(Y));
 figure;
@@ -397,6 +405,7 @@ band7=filter(BIIR12K(Fs),y);
 band8=filter(BIIR14K(Fs),y);
 band9=filter(BIIR16K(Fs),y);
 amplifiedwave = band1*gains(1)+band2*gains(2)+band3*gains(3)+band4*gains(4)+band5*gains(5)+band6*gains(6)+band7*gains(7)+band8*gains(8)+band9*gains(9);
+%Plotting the amplified output in frequency domain
 Nfft = length(amplifiedwave);
 f=linspace(0, Fs, Nfft);
 G=abs(fft(amplifiedwave, Nfft));
@@ -417,6 +426,7 @@ global gains;
 global Fs;
 global y;
 [y,Fs,gains]=play_equalizer(hObject , handles);
+%Plotting the output in time domain
 
 if handles.iir.Value == 1
 Y = y(:,1);
@@ -442,6 +452,7 @@ global Fs;
 global y;
 [y,Fs,gains]=play_equalizer(hObject , handles);
 if handles.iir.Value == 1
+    %Plotting the output in frequency domain
 Nfft = length(y);
 f=linspace(0, Fs, Nfft);
 G=abs(fft(y, Nfft));
@@ -475,15 +486,22 @@ global y;
 if handles.iir.Value == 1
     er=BIIR170(Fs);
     band1=filter(er,y);
+ %Plotting Time Domain
         Y = band1(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
+        %Plotting Frequency Domain
     Nfft = length(band1);
         f=linspace(0, Fs, Nfft);
         G=abs(fft(band1, Nfft));
         figure;
         plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
+        %Plotting Zero/poles 
+                [vz, vp] = zplane (band1);
+plot (real (vz), imag (vz), 'o');
+set (gca, 'ColorOrderIndex', 1);
+plot (real (vp), imag (vp));
 elseif handles.fir.Value == 1
     filtered_signal=filter(fir_equiripple_0_170(Fs),y);
     
@@ -503,15 +521,22 @@ global y;
 if handles.iir.Value == 1
     er=BIIR310(Fs);
     band2=filter(er,y);
+    %Plotting Time Domain
         Y = band2(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
+                %Plotting Frequency Domain
     Nfft = length(band2);
         f=linspace(0, Fs, Nfft);
         G=abs(fft(band2, Nfft));
                 figure;
         plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
+                            %Plotting Zero/Pole
+                [vz, vp] = zplane (band2);
+plot (real (vz), imag (vz), 'o');
+set (gca, 'ColorOrderIndex', 1);
+plot (real (vp), imag (vp));
 elseif handles.fir.Value == 1
     filtered_signal=filter(fir_equiripple_170_310(Fs),y);
     
@@ -531,15 +556,22 @@ global y;
 if handles.iir.Value == 1
     er=BIIR600(Fs);
     band3=filter(er,y);
+        %Plotting Time Domain
         Y = band3(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
+                %Plotting Frequency Domain
     Nfft = length(band3);
         f=linspace(0, Fs, Nfft);
         G=abs(fft(band3, Nfft));
                 figure;
         plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
+                            %Plotting Zero/Pole
+                [vz, vp] = zplane (band3);
+plot (real (vz), imag (vz), 'o');
+set (gca, 'ColorOrderIndex', 1);
+plot (real (vp), imag (vp));
         elseif handles.fir.Value == 1
     filtered_signal=filter(fir_equiripple_310_600(Fs),y);
     
@@ -559,15 +591,22 @@ global y;
 if handles.iir.Value == 1
     er=BIIR1000(Fs);
     band4=filter(er,y);
+        %Plotting Time Domain
         Y = band4(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
+                %Plotting Frequency Domain
     Nfft = length(band4);
         f=linspace(0, Fs, Nfft);
         G=abs(fft(band4, Nfft));
                 figure;
         plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
+                            %Plotting Zero/Pole
+                [vz, vp] = zplane (band4);
+plot (real (vz), imag (vz), 'o');
+set (gca, 'ColorOrderIndex', 1);
+plot (real (vp), imag (vp));
           elseif handles.fir.Value == 1
     filtered_signal=filter(fir_equiripple_600_1000(Fs),y);
     
@@ -589,15 +628,22 @@ if handles.iir.Value == 1
     [y,Fs,gains]=play_equalizer(hObject , handles);
     er=BIIR3K(Fs);
     band5=filter(er,y);
+             %Plotting Time Domain
         Y = band5(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
+                %Plotting Frequency Domain
     Nfft = length(band5);
         f=linspace(0, Fs, Nfft);
         G=abs(fft(band5, Nfft));
                 figure;
         plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
+                            %Plotting Zero/Pole
+               [vz, vp] = zplane (band5);
+plot (real (vz), imag (vz), 'o');
+set (gca, 'ColorOrderIndex', 1);
+plot (real (vp), imag (vp));
       elseif handles.fir.Value == 1
     filtered_signal=filter(fir_equiripple_1000_3000(Fs),y);
     
@@ -618,15 +664,22 @@ global y;
 if handles.iir.Value == 1
     er=BIIR6K(Fs);
     band6=filter(er,y);
+        %Plotting Time Domain
         Y = band6(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
+                %Plotting Frequency Domain
     Nfft = length(band6);
         f=linspace(0, Fs, Nfft);
         G=abs(fft(band6, Nfft));
         figure;        
         plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
+                            %Plotting Zero/Pole
+                [vz, vp] = zplane (band6);
+plot (real (vz), imag (vz), 'o');
+set (gca, 'ColorOrderIndex', 1);
+plot (real (vp), imag (vp));
       elseif handles.fir.Value == 1
     filtered_signal=filter(fir_equiripple_3000_6000(Fs),y);
     
@@ -647,15 +700,22 @@ global y;
 if handles.iir.Value == 1
     er=BIIR12K(Fs);
     band7=filter(er,y);
+        %Plotting Time Domain
         Y = band7(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
+                %Plotting Frequency Domain
     Nfft = length(band7);
         f=linspace(0, Fs, Nfft);
         G=abs(fft(band7, Nfft));
                 figure;
         plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
+                            %Plotting Zero/Pole
+                [vz, vp] = zplane (band7);
+plot (real (vz), imag (vz), 'o');
+set (gca, 'ColorOrderIndex', 1);
+plot (real (vp), imag (vp));
               elseif handles.fir.Value == 1
     filtered_signal=filter(fir_equiripple_6000_12000(Fs),y);
     
@@ -675,15 +735,22 @@ global y;
 if handles.iir.Value == 1
     er=BIIR14K(Fs);
     band8=filter(er,y);
+        %Plotting Time Domain
         Y = band8(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
+                %Plotting Frequency Domain
     Nfft = length(band8);
         f=linspace(0, Fs, Nfft);
         G=abs(fft(band8, Nfft));
                 figure;
         plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
+                            %Plotting Zero/Pole
+                [vz, vp] = zplane (band8);
+plot (real (vz), imag (vz), 'o');
+set (gca, 'ColorOrderIndex', 1);
+plot (real (vp), imag (vp));
               elseif handles.fir.Value == 1
     filtered_signal=filter(fir_equiripple_12000_14000(Fs),y);
     
@@ -704,15 +771,22 @@ global y;
 if handles.iir.Value == 1
     er=BIIR16K(Fs);
     band9=filter(er,y);
+       %Plotting Time Domain
         Y = band9(:,1);
         t = linspace(0, length(Y)./Fs, length(Y));
         figure;
         plot(t,Y);
+                %Plotting Frequency Domain
     Nfft = length(band9);
         f=linspace(0, Fs, Nfft);
         G=abs(fft(band9, Nfft));
                 figure;
+                    %Plotting Zero/Pole
         plot(f(1:Nfft/2), G(1:Nfft/2) , 'r-' );
+         [vz, vp] = zplane (band9);
+plot (real (vz), imag (vz), 'o');
+set (gca, 'ColorOrderIndex', 1);
+plot (real (vp), imag (vp));
               elseif handles.fir.Value == 1
     filtered_signal=filter(fir_equiripple_14000_16000(Fs),y);
     
