@@ -507,7 +507,7 @@ elseif handles.fir.Value == 1
     
     plot_filtered_signal_in_time_domain(filtered_signal,Fs);
     plot_filtered_signal_in_freq_domain(filtered_signal,Fs);
-fvtool(filtered_signal);
+plot_zeros_poles(band1,Fs);
 end
 
 % --- Executes on button press in plot_2_band.
@@ -542,7 +542,7 @@ elseif handles.fir.Value == 1
     
     plot_filtered_signal_in_time_domain(filtered_signal,Fs);
     plot_filtered_signal_in_freq_domain(filtered_signal,Fs);
-fvtool(filtered_signal);
+plot_zeros_poles(band2,Fs);
 end
 
 % --- Executes on button press in plot_3_band.
@@ -577,7 +577,7 @@ plot (real (vp), imag (vp));
     
     plot_filtered_signal_in_time_domain(filtered_signal,Fs);
     plot_filtered_signal_in_freq_domain(filtered_signal,Fs);
-fvtool(filtered_signal);
+plot_zeros_poles(band3,Fs);
 end
 
 % --- Executes on button press in plot_4_band.
@@ -612,7 +612,7 @@ plot (real (vp), imag (vp));
     
     plot_filtered_signal_in_time_domain(filtered_signal,Fs);
     plot_filtered_signal_in_freq_domain(filtered_signal,Fs);
-fvtool(filtered_signal);
+plot_zeros_poles(band4,Fs);
 end
 
 % --- Executes on button press in plot_5_band.
@@ -649,7 +649,7 @@ plot (real (vp), imag (vp));
     
     plot_filtered_signal_in_time_domain(filtered_signal,Fs);
     plot_filtered_signal_in_freq_domain(filtered_signal,Fs);
-fvtool(filtered_signal);
+plot_zeros_poles(band5,Fs);
 end
 
 % --- Executes on button press in plot_6_band.
@@ -685,7 +685,7 @@ plot (real (vp), imag (vp));
     
     plot_filtered_signal_in_time_domain(filtered_signal,Fs);
     plot_filtered_signal_in_freq_domain(filtered_signal,Fs);
-fvtool(filtered_signal);
+plot_zeros_poles(band6,Fs);
 end
 
 % --- Executes on button press in plot_7_band.
@@ -721,7 +721,7 @@ plot (real (vp), imag (vp));
     
     plot_filtered_signal_in_time_domain(filtered_signal,Fs);
     plot_filtered_signal_in_freq_domain(filtered_signal,Fs);
-fvtool(filtered_signal);
+plot_zeros_poles(band7,Fs);
 end
 % --- Executes on button press in plot_8_band.
 function plot_8_band_Callback(hObject, eventdata, handles)
@@ -756,7 +756,7 @@ plot (real (vp), imag (vp));
     
     plot_filtered_signal_in_time_domain(filtered_signal,Fs);
     plot_filtered_signal_in_freq_domain(filtered_signal,Fs);
-fvtool(filtered_signal);
+plot_zeros_poles(band8,Fs);
 end
 
 % --- Executes on button press in plot_9_band.
@@ -792,7 +792,7 @@ plot (real (vp), imag (vp));
     
     plot_filtered_signal_in_time_domain(filtered_signal,Fs);
     plot_filtered_signal_in_freq_domain(filtered_signal,Fs);
-fvtool(filtered_signal);
+plot_zeros_poles(band9,Fs);
 end
 
 
